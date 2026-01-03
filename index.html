@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For Naseem ❤️</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Georgia', serif;
+      background: linear-gradient(to bottom right, #0f0c29, #302b63, #24243e);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    .card {
+      max-width: 800px;
+      padding: 40px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+      text-align: center;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 10px;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-weight: normal;
+      opacity: 0.85;
+      margin-bottom: 30px;
+    }
+
+    p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+
+    .highlight {
+      color: #ffb6c1;
+      font-weight: bold;
+    }
+
+    .footer {
+      margin-top: 40px;
+      font-size: 1rem;
+      opacity: 0.8;
+    }
+
+    .heart {
+      font-size: 2rem;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2.2rem; }
+      p { font-size: 1.05rem; }
+      .card { padding: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <p id="tapHint" style="font-size:0.9rem; opacity:0.6; margin-bottom:10px;">tap anywhere for sound 🎧</p>
+    <h1>Naseem</h1>
+    <h2>This little corner of the internet is just for you</h2>
+    <p class="highlight">For the girl who feels like home.</p>
+
+    <p>
+      Somewhere between every laugh, every sarcastic comment, and every quiet moment,
+      you became my <span class="highlight">home</span>.
+    </p>
+
+    <p>
+      The world feels softer with you in it. Brighter. Kinder.
+      And every time I look into your eyes, I’m reminded that some things are just
+      <span class="highlight">meant to be</span>.
+    </p>
+
+    <p>
+      This website isn’t grand enough to hold everything I feel,
+      but it carries one simple truth 
+      <span class="highlight">you mean everything to me</span>.
+    </p>
+
+    <div class="heart" onclick="revealMessage()">❤️</div>
+    <p id="secret" style="display:none; margin-top:20px; font-style:italic;">If you found this, it means you were always meant to. I love you, Naseem.</p>
+
+    <div class="footer">
+      Always yours.<br />
+      — Subhav
+    </div>
+  </div>
+  <audio id="bgMusic" loop preload="auto">
+    <source src="song.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+  const music = document.getElementById('bgMusic');
+  music.volume = 0;
+
+  document.addEventListener('click', () => {
+    music.play().then(() => {
+      fadeInMusic();
+      const hint = document.getElementById('tapHint');
+      if (hint) hint.style.display = 'none';
+      if (navigator.vibrate) navigator.vibrate(30);
+    }).catch(err => {
+      console.log("Audio play blocked:", err);
+    });
+  }, { once: true });
+
+  function fadeInMusic() {
+    let volume = 0;
+    const fade = setInterval(() => {
+      if (volume < 1) {
+        volume += 0.02;
+        music.volume = volume;
+      } else {
+        clearInterval(fade);
+      }
+    }, 150);
+  }
+
+  function revealMessage() {
+    const msg = document.getElementById('secret');
+    msg.style.display = 'block';
+    if (navigator.vibrate) navigator.vibrate([20, 40, 20]);
+  }
+</script>
+
+</body>
+</html>
